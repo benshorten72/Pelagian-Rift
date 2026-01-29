@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3h0n078oky82"]
+
+[ext_resource type="PackedScene" uid="uid://cf10y5kdmqn5k" path="res://player.tscn" id="1_gojnm"]
+[ext_resource type="PackedScene" uid="uid://ba5l8itm4183q" path="res://enemies/enemy.tscn" id="2_1c2mv"]
+[ext_resource type="PackedScene" uid="uid://bycyh0dyuajeu" path="res://game/debugger.tscn" id="3_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://cd207ta5sctuf" path="res://enemies/zenith_star.tscn" id="4_4ptq8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_gojnm")]
+position = Vector2(547, 382)
+
+[node name="Enemy" parent="." instance=ExtResource("2_1c2mv")]
+position = Vector2(486, 344)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_1c2mv")]
+position = Vector2(481, 370)
+
+[node name="Enemy3" parent="." instance=ExtResource("2_1c2mv")]
+position = Vector2(517, 338)
+
+[node name="Debugger" parent="." instance=ExtResource("3_f7g2b")]
+position = Vector2(403, 301)
+
+[node name="ZenithStar" parent="." instance=ExtResource("4_4ptq8")]
+position = Vector2(417, 396)

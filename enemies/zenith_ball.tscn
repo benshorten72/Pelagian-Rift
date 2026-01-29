@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsbf5iplbgi38"]
+
+[ext_resource type="Script" uid="uid://cnmw0wyof7m8x" path="res://enemies/zenith_ball.gd" id="1_5c4bo"]
+[ext_resource type="Texture2D" uid="uid://dyvoi8liaf6po" path="res://resources/sprites/enemies/zenith.png" id="1_5k5df"]
+[ext_resource type="Texture2D" uid="uid://derv1g6x70j57" path="res://resources/sprites/enemies/chain.png" id="2_5c4bo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hxywh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5k5df")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ZenithBall" type="Node2D"]
+script = ExtResource("1_5c4bo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -29)
+sprite_frames = SubResource("SpriteFrames_hxywh")
+
+[node name="Chain" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(0, 1)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_5c4bo")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)

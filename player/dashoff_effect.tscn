@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://ducn1u3mn5klf"]
+
+[ext_resource type="Texture2D" uid="uid://btffukg3qo4vk" path="res://resources/sprites/dashoff_effect-Sheet.png" id="1_r62x7"]
+[ext_resource type="Script" uid="uid://cv1y8pcsitqom" path="res://player/dashoff_effect.gd" id="2_a4ij5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iygy6"]
+atlas = ExtResource("1_r62x7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjyfd"]
+atlas = ExtResource("1_r62x7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fcvb"]
+atlas = ExtResource("1_r62x7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_122dt"]
+atlas = ExtResource("1_r62x7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw4r1"]
+atlas = ExtResource("1_r62x7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0q6gg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iygy6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjyfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fcvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_122dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw4r1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[node name="DashoffEffect" type="AnimatedSprite2D"]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_0q6gg")
+autoplay = "default"
+frame_progress = 0.591462
+script = ExtResource("2_a4ij5")
+
+[connection signal="animation_looped" from="." to="." method="_on_animation_looped"]

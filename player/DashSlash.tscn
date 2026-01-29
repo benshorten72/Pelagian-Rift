@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0q2u5v28xg1a"]
+
+[ext_resource type="Script" uid="uid://cdy640rbiklub" path="res://player/dash_slash.gd" id="1_o1ul3"]
+[ext_resource type="Texture2D" uid="uid://b5yu26nct00pg" path="res://resources/sprites/dash-slash.png" id="2_ovwja"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2rbrg"]
+radius = 62.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj6k2"]
+atlas = ExtResource("2_ovwja")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asw06"]
+atlas = ExtResource("2_ovwja")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5x3v"]
+atlas = ExtResource("2_ovwja")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dslot"]
+atlas = ExtResource("2_ovwja")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ets3"]
+atlas = ExtResource("2_ovwja")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ohwfn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj6k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asw06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5x3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dslot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ets3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 21.0
+}]
+
+[node name="DashSlash" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_o1ul3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2rbrg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 0.00290609
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ohwfn")
+autoplay = "default"
+frame_progress = 0.811575
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

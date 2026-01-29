@@ -1,0 +1,207 @@
+[gd_scene load_steps=28 format=3 uid="uid://cd207ta5sctuf"]
+
+[ext_resource type="Script" uid="uid://e1gqgkgm48rh" path="res://enemies/zenith_star.gd" id="1_qruj1"]
+[ext_resource type="Texture2D" uid="uid://bdkfcc2lorjm5" path="res://resources/sprites/enemies/gunner-idle.png" id="2_7h1ly"]
+[ext_resource type="Texture2D" uid="uid://buwiqbnxl2dev" path="res://resources/sprites/enemies/gunner-Sheet-attack.png" id="3_ihw4i"]
+[ext_resource type="PackedScene" uid="uid://dsbf5iplbgi38" path="res://enemies/zenith_ball.tscn" id="4_xub0b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihw4i"]
+atlas = ExtResource("2_7h1ly")
+region = Rect2(0, 0, 56, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xub0b"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(0, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayb0l"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(64, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtrwg"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(128, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ayyx"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(192, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hueqr"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(256, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkkf6"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(320, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifueg"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(384, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn78h"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(448, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdouj"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(512, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e1nf"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(576, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouyw1"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(640, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mcm4"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(704, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oetbj"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(768, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhtce"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(832, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3icau"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(896, 0, 64, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpam7"]
+atlas = ExtResource("3_ihw4i")
+region = Rect2(960, 0, 64, 140)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xub0b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihw4i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xub0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayb0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtrwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ayyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hueqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkkf6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifueg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn78h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdouj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e1nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouyw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mcm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oetbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhtce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3icau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpam7")
+}],
+"loop": true,
+"name": &"prep_attack",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_5h4d8"]
+resource_name = "prep_attack"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.109524, 0.17619, 0.3, 0.385714, 0.467857, 0.575, 0.675, 0.769048, 0.844048, 0.977381, 1.04167, 1.1, 1.28095, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_o5d2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fs0te"]
+_data = {
+&"RESET": SubResource("Animation_o5d2y"),
+&"prep_attack": SubResource("Animation_5h4d8")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihw4i"]
+radius = 210.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_or4aq"]
+
+[node name="ZenithStar" type="CharacterBody2D"]
+script = ExtResource("1_qruj1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xub0b")
+animation = &"prep_attack"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fs0te")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ihw4i")
+debug_color = Color(0, 0.6, 0.701961, 0.0235294)
+
+[node name="ZenithBall" parent="." node_paths=PackedStringArray("zenith_parent") instance=ExtResource("4_xub0b")]
+position = Vector2(3, -34)
+zenith_parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_or4aq")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
