@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1occ6txy6ofj"]
+
+[ext_resource type="Script" uid="uid://dd1m56aemyg1p" path="res://background-elements/ExecutableObject.gd" id="1_cbgj3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbgj3"]
+radius = 19.0263
+
+[node name="ExecutableObject" type="Node2D"]
+script = ExtResource("1_cbgj3")
+
+[node name="ExecutableDetectBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecutableDetectBox"]
+shape = SubResource("CircleShape2D_cbgj3")
+debug_color = Color(0.854902, 0, 0.360784, 0.72549)

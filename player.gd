@@ -18,7 +18,7 @@ var can_input = true
 var can_dodge_cancel = true
 var action_pressed = false
 var dodge_pressed = false
-var closest = null
+var closest:ExecutableObject = null
 var dash_elapsed_time = 0.0
 var dash_start_position: Vector2
 var dash_target_position: Vector2
@@ -29,12 +29,12 @@ var dash_target_position: Vector2
 @onready var mouse_scene = preload("res://player/MouseObject.tscn")
 @onready var slash_scene = preload("res://player/slashEffect.tscn")
 
-var mouse_instance
+var mouse_instance:MouseObject
 
 func _ready() -> void:
 	mouse_instance = mouse_scene.instantiate()
 	add_child(mouse_instance)
-	print(mouse_instance)
+	
 
 func get_input():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")

@@ -7,7 +7,8 @@ enum States {
 	AGGRO,
 	ATTACKING,
 	PREP_ATTACK,
-	STUNNED
+	STUNNED,
+	RECHARGING
 }
 var health:float
 @export var MAX_HEALTH = 180

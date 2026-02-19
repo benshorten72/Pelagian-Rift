@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsbf5iplbgi38"]
+[gd_scene load_steps=8 format=3 uid="uid://dsbf5iplbgi38"]
 
 [ext_resource type="Script" uid="uid://cnmw0wyof7m8x" path="res://enemies/zenith_ball.gd" id="1_5c4bo"]
 [ext_resource type="Texture2D" uid="uid://dyvoi8liaf6po" path="res://resources/sprites/enemies/zenith.png" id="1_5k5df"]
 [ext_resource type="Texture2D" uid="uid://derv1g6x70j57" path="res://resources/sprites/enemies/chain.png" id="2_5c4bo"]
+[ext_resource type="PackedScene" uid="uid://d1occ6txy6ofj" path="res://background-elements/ExecutableObject.tscn" id="4_hxywh"]
+
+[sub_resource type="Curve" id="Curve_5c4bo"]
+_data = [Vector2(0.166667, 0.171911), 0.0, 0.0, 0, 0, Vector2(0.672285, 0.386416), -0.639324, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hxywh"]
 animations = [{
@@ -15,8 +20,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hxywh"]
+radius = 18.0
+
 [node name="ZenithBall" type="Node2D"]
+z_index = -1
 script = ExtResource("1_5c4bo")
+airtime_curve = SubResource("Curve_5c4bo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
@@ -28,5 +38,16 @@ texture_repeat = 2
 position = Vector2(0, 1)
 scale = Vector2(-1, 1)
 texture = ExtResource("2_5c4bo")
+offset = Vector2(0, -32)
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -29)
+shape = SubResource("CircleShape2D_hxywh")
+
+[node name="ExecutableObject2" parent="." instance=ExtResource("4_hxywh")]

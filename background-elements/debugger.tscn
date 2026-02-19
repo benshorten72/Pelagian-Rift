@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bycyh0dyuajeu"]
 
-[ext_resource type="Script" uid="uid://x6ro8ifrppcf" path="res://game/debugger.gd" id="1_i45gh"]
+[ext_resource type="Script" uid="uid://x6ro8ifrppcf" path="res://background-elements/debugger.gd" id="1_i45gh"]
 
 [node name="Debugger" type="Node2D"]
 script = ExtResource("1_i45gh")

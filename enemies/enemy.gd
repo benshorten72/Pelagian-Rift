@@ -6,6 +6,7 @@ var bulletScene = preload("res://enemies/bullet.tscn")
 
 @onready var health_bar:ProgressBar = $ProgressBar
 @onready var timer:Timer = $Timer
+@onready var executable_object:ExecutableObject = $ExecutableObject
 
 const SPEED = 30
 const ATTACK_SPEED = 50
@@ -15,22 +16,28 @@ var attack_speed_cdn = ATTACK_SPEED
 var AGGRO_object:CharacterBody2D = null
 var has_created_target = false
 
+var execute_function=func ():	
+	take_damage(200)
+	
+	
 func _ready() -> void:
+	print("Enemy:",get_children(true))
+
 	current_state=States.IDLE
 	health_bar.max_value=MAX_HEALTH
 	health_bar.min_value=0
 	health_bar.scale = 	health_bar.scale/8
 	health = MAX_HEALTH
+	
+	executable_object.set_execute_function(execute_function)
+
 
 func is_executable():
 	if health / float(MAX_HEALTH) > THRESHOLD_PERCENTAGE:
 		return false
 	else:
-		if has_created_target != true:
-			var target = target_scene.instantiate()
-			get_parent().add_child(target)
-			target.set_target(self)
-			has_created_target=true
+		executable_object.set_is_executable(true)
+		executable_object.set_origin(global_position)
 		return true
 func take_damage(amount):
 	health -= amount
@@ -46,14 +53,14 @@ func fire():
 	get_tree().current_scene.add_child(bullet)
 	bullet.init(AGGRO_object.global_position)
 
-
 func return_IDLE():
 	current_state = States.AGGRO
 	attack_speed_cdn = ATTACK_SPEED
 	
 
-
 func _physics_process(delta: float) -> void:
+	if is_instance_valid(executable_object):
+		executable_object.set_origin(global_position)
 	health_bar.value=health
 	if is_executable():
 		health_bar.modulate = Color(1,.5,.5,1)

@@ -28,6 +28,7 @@ enabled=PackedStringArray("res://addons/animation-key-helper/plugin.cfg")
 
 enemies=""
 projectiles=""
+executables="Objects that can be 'dashed' towards"
 
 [input]
 
