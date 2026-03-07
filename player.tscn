@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://cf10y5kdmqn5k"]
+[gd_scene load_steps=72 format=3 uid="uid://cf10y5kdmqn5k"]
 
 [ext_resource type="Script" uid="uid://dlvro20a1526p" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://doh40cpw0g14d" path="res://resources/sprites/idle-Sheet.png" id="2_1jxqw"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://8f4esf34hsyo" path="res://resources/sprites/run-strafe-Sheet.png" id="6_bwjto"]
 [ext_resource type="Script" uid="uid://b0ffxppyhw51d" path="res://dodge.gd" id="7_1jxqw"]
 [ext_resource type="Script" uid="uid://ds5l73iygwidu" path="res://player_hurtbox.gd" id="10_n7ghd"]
+[ext_resource type="Script" uid="uid://cf72rfox4iqwl" path="res://stunned.gd" id="13_bwjto"]
+[ext_resource type="PackedScene" uid="uid://cfdp08gjy6iod" path="res://player/visual_effects/trail/WaterTrail.tscn" id="15_606se"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
 atlas = ExtResource("2_b26j0")
@@ -385,10 +387,10 @@ tracks/2/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -572,10 +574,10 @@ tracks/5/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.256377, 0.435698),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.00812499, 0.256377, 0.435698),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_dw050"]
@@ -836,22 +838,30 @@ metadata/_custom_type_script = "uid://dn0b84fjbider"
 script = ExtResource("6_2hs0m")
 next_state = "attack2"
 animation = "attack1"
+damage = 15
 metadata/_custom_type_script = "uid://dn0b84fjbider"
 
 [node name="Attack2" type="Node" parent="StateMachine"]
 script = ExtResource("6_2hs0m")
 next_state = "attack3"
 animation = "attack2"
+damage = 35
+knockback = 125
 metadata/_custom_type_script = "uid://dn0b84fjbider"
 
 [node name="Attack3" type="Node" parent="StateMachine"]
 script = ExtResource("6_2hs0m")
 animation = "attack3"
+damage = 50
+knockback = 150
 metadata/_custom_type_script = "uid://dn0b84fjbider"
 
 [node name="Dodge" type="Node" parent="StateMachine"]
 script = ExtResource("7_1jxqw")
 metadata/_custom_type_script = "uid://dn0b84fjbider"
+
+[node name="Stunned" type="Node" parent="StateMachine"]
+script = ExtResource("13_bwjto")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -866,6 +876,8 @@ debug_color = Color(0.834071, 0.256152, 0.734002, 0.42)
 
 [node name="SpeedBoostTimer" type="Timer" parent="."]
 wait_time = 0.689
+
+[node name="WaterTrail" parent="." instance=ExtResource("15_606se")]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

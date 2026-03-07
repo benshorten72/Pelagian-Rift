@@ -16,20 +16,17 @@ var dash_effect_rotation_offset = 270
 
 func enter(previous_state_path: String, data := {}) -> void:
 	animation_player.active=true
-	print(animation_player.name)
 	curr_rotation = player.rotation+90
 	bonus_speed=0
 	speed_timer_wait = speed_boost_timer.wait_time
 	animation_player.play("idle")
+	player.hurtbox.collision_shape.disabled=true
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
-		print("Dashing")
 		finished.emit(DASH)
 	if Input.is_action_just_pressed("attack"):
-		print("Attack")
 		finished.emit(ATTACK1)
 	if Input.is_action_just_pressed("dodge"):
-		print("Dodge")
 		finished.emit(DODGE)
 	player.velocity = lerp(player.velocity, player.get_input() * (player.SPEED+bonus_speed), delta * player.ACCEL)	
 	

@@ -4,7 +4,6 @@ extends Enemy
 var bulletScene = preload("res://enemies/bullet.tscn")
 @onready var target_scene = preload("res://player/playerTarget.tscn")
 
-@onready var health_bar:ProgressBar = $ProgressBar
 @onready var timer:Timer = $Timer
 @onready var executable_object:ExecutableObject = $ExecutableObject
 
@@ -17,16 +16,11 @@ var AGGRO_object:CharacterBody2D = null
 var has_created_target = false
 
 var execute_function=func ():	
-	take_damage(200)
+	take_damage(20000)
 	
 	
 func _ready() -> void:
-	print("Enemy:",get_children(true))
-
 	current_state=States.IDLE
-	health_bar.max_value=MAX_HEALTH
-	health_bar.min_value=0
-	health_bar.scale = 	health_bar.scale/8
 	health = MAX_HEALTH
 	
 	executable_object.set_execute_function(execute_function)
@@ -61,9 +55,7 @@ func return_IDLE():
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(executable_object):
 		executable_object.set_origin(global_position)
-	health_bar.value=health
-	if is_executable():
-		health_bar.modulate = Color(1,.5,.5,1)
+	is_executable()
 	match current_state:
 		States.IDLE:
 			if AGGRO_object != null:

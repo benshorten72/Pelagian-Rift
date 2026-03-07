@@ -7,6 +7,7 @@ const ATTACK1 = "Attack1"
 const ATTACK2 = "Attack2"
 const ATTACK3 = "Attack3"
 const DODGE = "Dodge"
+const STUNNED = "Stunned"
 
 var player: Player
 

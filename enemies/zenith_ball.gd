@@ -29,7 +29,11 @@ func _ready() -> void:
 		self.queue_free()
 	executable_object.set_execute_function(execute_function)
 func _physics_process(delta: float) -> void:
-	aggro_object=zenith_parent.AGGRO_object
+	if !is_instance_valid(zenith_parent):
+		queue_free()
+		return
+	if is_instance_valid(zenith_parent) and is_instance_valid(zenith_parent.AGGRO_object):
+		aggro_object=zenith_parent.AGGRO_object
 	if is_instance_valid(executable_object):
 		var midpoint = (global_position+zenith_parent.global_position)/2
 		executable_object.set_origin(midpoint)		

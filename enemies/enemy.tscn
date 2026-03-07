@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba5l8itm4183q"]
+[gd_scene load_steps=7 format=3 uid="uid://ba5l8itm4183q"]
 
 [ext_resource type="Script" uid="uid://bli0xwqjiys08" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://c0j2abemeadf0" path="res://icon.svg" id="1_fw1ev"]
 [ext_resource type="PackedScene" uid="uid://d1occ6txy6ofj" path="res://background-elements/ExecutableObject.tscn" id="3_orwns"]
+[ext_resource type="PackedScene" uid="uid://bs1negae27ke1" path="res://enemies/HPBar.tscn" id="4_a6vjd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7frlh"]
 
@@ -30,18 +31,16 @@ texture = ExtResource("1_fw1ev")
 shape = SubResource("CircleShape2D_orwns")
 debug_color = Color(0, 0.6, 0.701961, 0.0235294)
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -22.0
-offset_top = -15.0
-offset_right = 287.0
-offset_bottom = 12.0
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
 [node name="ExecutableObject" parent="." instance=ExtResource("3_orwns")]
 position = Vector2(335.097, 330.048)
+
+[node name="HpBar" parent="." instance=ExtResource("4_a6vjd")]
+offset_left = 0.0
+offset_right = 200.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

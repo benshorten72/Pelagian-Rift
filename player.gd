@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var _animation_player:NodePath
 @onready var animation_player:AnimationPlayer = get_node(_animation_player)
-@onready var hurtbox = $HurtBox
+@onready var hurtbox := $HurtBox
 @onready var state_machine = $StateMachine
 
 const SPEED = 300.0 
@@ -27,7 +27,6 @@ var dash_target_position: Vector2
 # Enemies in an area and whether they are valid for a dash execute. Player should
 # not have to deal with figuring out whether enemie is valid or not
 @onready var mouse_scene = preload("res://player/MouseObject.tscn")
-@onready var slash_scene = preload("res://player/slashEffect.tscn")
 
 var mouse_instance:MouseObject
 
@@ -50,29 +49,7 @@ func ready_for_input():
 	
 func ready_for_dodge_cancel():
 	can_dodge_cancel = true
-func _on_hurt_box_body_entered(body) -> void:
-	if body is Enemy:
-		print(body)
-		var current_state = str(state_machine.state.get_name()).to_lower()
-		var slash = slash_scene.instantiate()
-		get_parent().add_child(slash)
-		slash.global_position = body.global_position
-		match (current_state):
-			"attack1":
-				print(body)
-				body.take_damage(25)
-				body.push(global_position, 100)
-			"attack2":
-				body.take_damage(50)
-				body.push(global_position, 200)
-
-			"attack3":
-				body.take_damage(75)
-				body.push(global_position, 300)
-				
-
-
-
-func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if (area.is_in_group("projectiles")):
-		area.get_parent().queue_free()
+func push(push_from_point, strength):
+	var direction = (push_from_point - global_position).normalized()
+	velocity = -(direction * strength)
+	move_and_slide()

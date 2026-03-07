@@ -11,16 +11,22 @@
 position = Vector2(547, 382)
 
 [node name="Enemy" parent="." instance=ExtResource("2_1c2mv")]
-position = Vector2(486, 344)
+position = Vector2(921, 37)
 
 [node name="Enemy2" parent="." instance=ExtResource("2_1c2mv")]
-position = Vector2(481, 370)
+position = Vector2(1070, 157)
 
 [node name="Enemy3" parent="." instance=ExtResource("2_1c2mv")]
-position = Vector2(517, 338)
+position = Vector2(649, -67)
 
 [node name="Debugger" parent="." instance=ExtResource("3_f7g2b")]
 position = Vector2(403, 301)
 
 [node name="ZenithStar" parent="." instance=ExtResource("4_4ptq8")]
-position = Vector2(358, 393)
+position = Vector2(-4, 523)
+
+[node name="ZenithStar2" parent="." instance=ExtResource("4_4ptq8")]
+position = Vector2(49, 757)
+
+[node name="ZenithStar3" parent="." instance=ExtResource("4_4ptq8")]
+position = Vector2(247, 789)

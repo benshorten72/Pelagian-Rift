@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs1negae27ke1"]
+
+[ext_resource type="Script" uid="uid://ds0da7b3muk0m" path="res://enemies/hp_bar.gd" id="1_lmoq3"]
+
+[node name="HpBar" type="ProgressBar"]
+offset_left = -12.0
+offset_right = 188.0
+offset_bottom = 27.0
+script = ExtResource("1_lmoq3")

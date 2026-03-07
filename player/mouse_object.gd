@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("HII",area.get_parent(),area.get_parent() is ExecutableObject )
 	if area and area.get_parent() and area.get_parent() is ExecutableObject:
 			executables_list.append(area.get_parent())
 
