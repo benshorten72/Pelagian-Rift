@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=32 format=3 uid="uid://m5i0jjohq1iw"]
+[gd_resource type="VisualShader" load_steps=33 format=3 uid="uid://m5i0jjohq1iw"]
 
 [ext_resource type="Texture2D" uid="uid://qqv84pgrijej" path="res://resources/shader/WaterTrailGradientFaded.png" id="1_a6itb"]
 
@@ -8,6 +8,7 @@ operator = 1
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_lydcw"]
 default_input_values = [0, 0.0, 1, 7.0]
+linked_parent_graph_frame = 56
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_fogn5"]
@@ -48,42 +49,45 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_6svbt"]
 parameter_name = "BrightnessOffset"
-default_value = 0.5
+default_value_enabled = true
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_6rht7"]
 parameter_name = "QuantizeColourAmount"
 default_value_enabled = true
-default_value = 6.0
+default_value = 8.0
 
 [sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_yrwx1"]
 output_port_for_preview = 0
-default_input_values = [0, 0.0, 1, -4.52514e-12, 2, 1.0]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_r7hog"]
 parameter_name = "UpperCutoff"
 default_value_enabled = true
-default_value = 0.3
+default_value = 1.0
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_nw8sh"]
-size = Vector2(1809.39, 1127.67)
+size = Vector2(556, 253)
 title = "Get sine value"
+attached_nodes = PackedInt32Array(6)
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_ldv6u"]
 size = Vector2(572.627, 922.575)
 title = "Get r value from texture"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_lm2iw"]
-size = Vector2(1726.84, 797.328)
+size = Vector2(421, 369)
 title = "Quantize the value"
+attached_nodes = PackedInt32Array(23)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_73l4h"]
+constant = Color(0.502671, 0.690921, 0.842487, 1)
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_s8vcr"]
 parameter_name = "InitialAlpha"
 default_value_enabled = true
-default_value = 0.46
+default_value = 0.5
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gl8s8"]
+linked_parent_graph_frame = 54
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_2arv1"]
@@ -108,6 +112,10 @@ operator = 3
 default_input_values = [0, 0.0, 1, 2.0]
 operator = 5
 
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_a6itb"]
+default_input_values = [0, 0.0, 1, 2.5]
+operator = 2
+
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rvohj"]
 input_name = "color"
 
@@ -117,18 +125,18 @@ varying_type = 5
 
 [resource]
 code = "shader_type canvas_item;
-render_mode blend_mix;
+render_mode blend_add;
 
 
 // Varyings
 varying vec4 var_VertexColour;
 
 uniform sampler2D tex_frg_43 : source_color;
-uniform float InitialAlpha = 0.46000000834465;
+uniform float InitialAlpha = 0.5;
 uniform float Speed = 0.10000000149012;
-uniform float QuantizeColourAmount = 6.0;
-uniform float BrightnessOffset;
-uniform float UpperCutoff = 0.30000001192093;
+uniform float QuantizeColourAmount = 8.0;
+uniform float BrightnessOffset = 0.0;
+uniform float UpperCutoff = 1.0;
 
 
 
@@ -145,7 +153,7 @@ void vertex() {
 
 void fragment() {
 // ColorConstant:58
-	vec4 n_out58p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+	vec4 n_out58p0 = vec4(0.502671, 0.690921, 0.842487, 1.000000);
 
 
 // Texture2D:43
@@ -247,18 +255,24 @@ void fragment() {
 
 
 // Clamp:52
-	float n_in52p1 = -0.00000;
+	float n_in52p1 = 0.00000;
 	float n_out52p0 = clamp(n_out46p0, n_in52p1, n_out53p0);
+
+
+// FloatOp:71
+	float n_in71p1 = 2.50000;
+	float n_out71p0 = n_out52p0 * n_in71p1;
 
 
 // Output:0
 	COLOR.rgb = vec3(n_out58p0.xyz);
-	COLOR.a = n_out52p0;
+	COLOR.a = n_out71p0;
 
 
 }
 "
 mode = 1
+modes/blend = 1
 flags/light_only = false
 varyings/VertexColour = "0,5"
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_rvohj")
@@ -266,15 +280,15 @@ nodes/vertex/2/position = Vector2(-1000, 260)
 nodes/vertex/3/node = SubResource("VisualShaderNodeVaryingSetter_3ck3n")
 nodes/vertex/3/position = Vector2(-420, 320)
 nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0)
-nodes/fragment/0/position = Vector2(4840, 380)
+nodes/fragment/0/position = Vector2(5240, 220)
 nodes/fragment/6/node = SubResource("VisualShaderNodeInput_gl8s8")
-nodes/fragment/6/position = Vector2(-2640, -300)
+nodes/fragment/6/position = Vector2(-2620, -380)
 nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_m07s6")
 nodes/fragment/7/position = Vector2(-2040, -280)
 nodes/fragment/12/node = SubResource("VisualShaderNodeFloatOp_8lv5q")
 nodes/fragment/12/position = Vector2(320, -140)
 nodes/fragment/23/node = SubResource("VisualShaderNodeFloatOp_lydcw")
-nodes/fragment/23/position = Vector2(1640, -20)
+nodes/fragment/23/position = Vector2(1380, -180)
 nodes/fragment/24/node = SubResource("VisualShaderNodeFloatFunc_fogn5")
 nodes/fragment/24/position = Vector2(1960, -80)
 nodes/fragment/25/node = SubResource("VisualShaderNodeFloatOp_g8cnj")
@@ -298,7 +312,7 @@ nodes/fragment/46/position = Vector2(3780, 540)
 nodes/fragment/47/node = SubResource("VisualShaderNodeFloatParameter_6svbt")
 nodes/fragment/47/position = Vector2(3260, 880)
 nodes/fragment/48/node = SubResource("VisualShaderNodeFloatParameter_6rht7")
-nodes/fragment/48/position = Vector2(1100, 140)
+nodes/fragment/48/position = Vector2(900, 260)
 nodes/fragment/52/node = SubResource("VisualShaderNodeClamp_yrwx1")
 nodes/fragment/52/position = Vector2(4320, 540)
 nodes/fragment/53/node = SubResource("VisualShaderNodeFloatParameter_r7hog")
@@ -323,4 +337,6 @@ nodes/fragment/66/node = SubResource("VisualShaderNodeInput_rlfcb")
 nodes/fragment/66/position = Vector2(-4380, -300)
 nodes/fragment/70/node = SubResource("VisualShaderNodeFloatOp_40j8o")
 nodes/fragment/70/position = Vector2(-2420, 880)
-nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 23, 0, 24, 0, 24, 0, 25, 0, 27, 0, 7, 1, 37, 0, 12, 1, 36, 0, 34, 0, 34, 0, 35, 0, 45, 0, 12, 0, 47, 0, 46, 1, 48, 0, 23, 1, 48, 0, 25, 1, 53, 0, 52, 2, 46, 0, 52, 0, 58, 0, 0, 0, 59, 0, 45, 1, 43, 0, 36, 0, 43, 0, 45, 0, 65, 0, 46, 0, 64, 3, 70, 0, 70, 0, 65, 1, 7, 0, 34, 1, 35, 0, 37, 0, 12, 0, 23, 0, 43, 0, 64, 0, 25, 0, 65, 0, 52, 0, 0, 1)
+nodes/fragment/71/node = SubResource("VisualShaderNodeFloatOp_a6itb")
+nodes/fragment/71/position = Vector2(4780, 480)
+nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 23, 0, 24, 0, 24, 0, 25, 0, 27, 0, 7, 1, 37, 0, 12, 1, 36, 0, 34, 0, 34, 0, 35, 0, 45, 0, 12, 0, 47, 0, 46, 1, 48, 0, 23, 1, 48, 0, 25, 1, 53, 0, 52, 2, 46, 0, 52, 0, 58, 0, 0, 0, 59, 0, 45, 1, 43, 0, 36, 0, 43, 0, 45, 0, 64, 3, 70, 0, 70, 0, 65, 1, 7, 0, 34, 1, 35, 0, 37, 0, 12, 0, 23, 0, 43, 0, 64, 0, 25, 0, 65, 0, 65, 0, 46, 0, 52, 0, 71, 0, 71, 0, 0, 1)

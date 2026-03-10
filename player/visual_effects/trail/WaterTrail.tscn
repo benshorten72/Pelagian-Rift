@@ -1,16 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfdp08gjy6iod"]
+[gd_scene load_steps=12 format=3 uid="uid://cfdp08gjy6iod"]
 
+[ext_resource type="Script" uid="uid://dmq0tcqc1sxnr" path="res://player/visual_effects/trail/water_ripple.gd" id="1_j6ry4"]
 [ext_resource type="Shader" uid="uid://m5i0jjohq1iw" path="res://resources/shader/RippleShader.tres" id="1_l10pc"]
-[ext_resource type="Texture2D" uid="uid://bj8nipadoyn4g" path="res://resources/shader/Screenshot 2026-03-03 at 23.24.47.png" id="1_tp6pl"]
+[ext_resource type="Texture2D" uid="uid://dpdeh38tjfotj" path="res://resources/shader/WaterTrailGradient.png" id="2_2e2r3"]
 [ext_resource type="Script" uid="uid://btqv3cqwutm5k" path="res://player/visual_effects/trail/water_trail.gd" id="2_l10pc"]
+[ext_resource type="Shader" uid="uid://m8idfdsflkdo" path="res://player/visual_effects/trail/WaterTrailRippleActual.gdshader" id="4_la3ee"]
+[ext_resource type="Texture2D" uid="uid://egpykys3rupr" path="res://player/visual_effects/trail/CircleBlur64x64.png" id="5_j6ry4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l10pc"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2e2r3"]
 shader = ExtResource("1_l10pc")
-shader_parameter/InitialAlpha = 0.46
+shader_parameter/InitialAlpha = 0.8
 shader_parameter/Speed = 0.1
 shader_parameter/QuantizeColourAmount = 6.0
 shader_parameter/BrightnessOffset = 0.0
-shader_parameter/UpperCutoff = 0.3
+shader_parameter/UpperCutoff = 0.6
 
 [sub_resource type="Curve" id="Curve_ubcqt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.551036), 0.0, 0.0, 0, 0]
@@ -19,25 +25,41 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_ubcqt"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l10pc"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6ry4"]
+shader = ExtResource("4_la3ee")
+shader_parameter/Frequency1 = 20.0
+shader_parameter/Speed1 = 3.0
+shader_parameter/Frequency2 = 12.0
+shader_parameter/Speed2 = 2.0
+shader_parameter/FallOff = 5.0
+shader_parameter/Strength = 0.5
+shader_parameter/Distortion = 0.02
 
 [node name="WaterTrail" type="Node2D"]
+script = ExtResource("1_j6ry4")
+
+[node name="WaterTrailSprite" type="Sprite2D" parent="."]
+position = Vector2(5.96046e-08, 0)
+texture = SubResource("ViewportTexture_l10pc")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 transparent_bg = true
-size = Vector2i(256, 256)
+size = Vector2i(128, 128)
 
 [node name="WaterTrailLine" type="Line2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_2e2r3")
+position = Vector2(64, 64)
 points = PackedVector2Array(8, 10.625)
 width_curve = SubResource("Curve_ubcqt")
 gradient = SubResource("Gradient_ubcqt")
-texture = ExtResource("1_tp6pl")
+texture = ExtResource("2_2e2r3")
 texture_mode = 2
 script = ExtResource("2_l10pc")
-MAX_QUEUE_LENGTH = 10
+MAX_QUEUE_LENGTH = 12
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("ViewportTexture_l10pc")
+[node name="WaterRipple" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_j6ry4")
+position = Vector2(64, 64)
+scale = Vector2(0.05, 0.5)
+texture = ExtResource("5_j6ry4")

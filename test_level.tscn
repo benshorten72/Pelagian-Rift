@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3h0n078oky82"]
+[gd_scene load_steps=6 format=3 uid="uid://c3h0n078oky82"]
 
 [ext_resource type="PackedScene" uid="uid://cf10y5kdmqn5k" path="res://player.tscn" id="1_gojnm"]
+[ext_resource type="Texture2D" uid="uid://bj8nipadoyn4g" path="res://resources/shader/Screenshot 2026-03-03 at 23.24.47.png" id="1_sb12i"]
 [ext_resource type="PackedScene" uid="uid://ba5l8itm4183q" path="res://enemies/enemy.tscn" id="2_1c2mv"]
 [ext_resource type="PackedScene" uid="uid://bycyh0dyuajeu" path="res://background-elements/debugger.tscn" id="3_f7g2b"]
 [ext_resource type="PackedScene" uid="uid://cd207ta5sctuf" path="res://enemies/zenith_star.tscn" id="4_4ptq8"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.44509, 0.680012, 0.917172, 1)
+position = Vector2(376, 97)
+texture = ExtResource("1_sb12i")
 
 [node name="Player" parent="." instance=ExtResource("1_gojnm")]
 position = Vector2(547, 382)

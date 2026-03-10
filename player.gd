@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var hurtbox := $HurtBox
 @onready var state_machine = $StateMachine
 
+const MAX_HEALTH = 100
 const SPEED = 300.0 
 const BONUS_SPEED=200.0
 const ACCEL = 4.0 
@@ -13,7 +14,7 @@ const DASH_OFFSET = 20
 const DASH_TIME_TO_REACH = .1
 var input: Vector2
 
-
+var health:int
 var can_input = true
 var can_dodge_cancel = true
 var action_pressed = false
@@ -33,6 +34,7 @@ var mouse_instance:MouseObject
 func _ready() -> void:
 	mouse_instance = mouse_scene.instantiate()
 	add_child(mouse_instance)
+	health=MAX_HEALTH
 	
 
 func get_input():
@@ -53,3 +55,8 @@ func push(push_from_point, strength):
 	var direction = (push_from_point - global_position).normalized()
 	velocity = -(direction * strength)
 	move_and_slide()
+
+func hurt(amount:int, push_from_point=global_position, strength=1):
+	health-=amount
+	push(push_from_point, strength)
+	

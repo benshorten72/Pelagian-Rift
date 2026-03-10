@@ -1,8 +1,12 @@
 extends Line2D
 @export var MAX_QUEUE_LENGTH = 5
+@export var smallestTipWidth = 1
+@export var largestTipWidth = 2
+
 var queue: Array[Vector2] = []
 var parent:Node2D
 var offset:Vector2 = Vector2(0,0)
+
 func _ready() -> void:
 	if is_instance_valid(get_parent()):
 		parent = get_parent().get_parent().get_parent()
@@ -26,10 +30,6 @@ func _process(delta: float) -> void:
 	var true_min = INF
 	var true_max = -INF
 
-
-	var smallestTipWidth:float = width_curve.min_value
-	var largestTipWidth:float =width_curve.max_value
-	print(smallestTipWidth,largestTipWidth)
 	var widthValue:float  = lerpf(smallestTipWidth, largestTipWidth, 
 	inverse_lerp(0, queue.size(),total_length))
 	width_curve.set_point_value(0, widthValue)
