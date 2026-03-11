@@ -1,7 +1,7 @@
 extends Node2D
 class_name ExecutableObject
 var has_created_target:bool = false
-@onready var target_scene = preload("res://player/playerTarget.tscn")
+@onready var target_scene = preload("res://player/backgroundObjects/playerTarget.tscn")
 var parent:Node2D
 var origin:Vector2 
 var target:Target

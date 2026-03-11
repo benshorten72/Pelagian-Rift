@@ -27,7 +27,7 @@ var dash_target_position: Vector2
 # On creation, player object creates a mouse object that handles detecting
 # Enemies in an area and whether they are valid for a dash execute. Player should
 # not have to deal with figuring out whether enemie is valid or not
-@onready var mouse_scene = preload("res://player/MouseObject.tscn")
+@onready var mouse_scene = preload("res://player/backgroundObjects/MouseObject.tscn")
 
 var mouse_instance:MouseObject
 

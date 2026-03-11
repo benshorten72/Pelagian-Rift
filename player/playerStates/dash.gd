@@ -2,8 +2,8 @@ extends PlayerState
 var executables_list:Array[ExecutableObject]
 var min_distance = 100000
 var distance = min_distance;
-@onready var slash_scene = preload("res://player/DashSlash.tscn")
-@onready var dash_effect_scene = preload("res://player/dashoff_effect.tscn")
+@onready var slash_scene = preload("res://player/dashing/DashSlash.tscn")
+@onready var dash_effect_scene = preload("res://player/dashing/dashoffEffect.tscn")
 
 func enter(previous_state_path: String, data := {}) -> void:
 	print("Dash Entered")

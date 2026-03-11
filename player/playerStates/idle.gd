@@ -5,7 +5,7 @@ extends PlayerState
 @onready var torso = $"../../AnimatedSprite2D"
 @onready var speed_boost_timer:Timer = $"../../SpeedBoostTimer"
 @onready var animation_player:AnimationPlayer = get_node(_animation_player)
-@onready var dash_effect_scene = preload("res://player/dashoff_effect.tscn")
+@onready var dash_effect_scene = preload("res://player/dashing/dashoffEffect.tscn")
 
 const ROTATE_THRESHOLD := PI / 2  
 var speed_timer_wait

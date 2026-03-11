@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dvl5hv1nhfgn1"]
 
-[ext_resource type="Script" uid="uid://cx4iq00xglk3y" path="res://player/slash_effect.gd" id="1_hoeba"]
+[ext_resource type="Script" uid="uid://cx4iq00xglk3y" path="res://player/visual_effects/slash_effect.gd" id="1_hoeba"]
 [ext_resource type="Texture2D" uid="uid://cnsr2l5ay787x" path="res://resources/sprites/slasheffect-Sheet.png" id="2_2e3re"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_osdri"]

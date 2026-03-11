@@ -2,7 +2,7 @@ extends Enemy
 
 @onready var detection_area:Area2D = $Area2D
 var bulletScene = preload("res://enemies/bullet.tscn")
-@onready var target_scene = preload("res://player/playerTarget.tscn")
+@onready var target_scene = preload("res://player/backgroundObjects/playerTarget.tscn")
 
 @onready var timer:Timer = $Timer
 @onready var executable_object:ExecutableObject = $ExecutableObject

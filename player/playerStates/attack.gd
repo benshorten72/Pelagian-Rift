@@ -7,7 +7,7 @@ extends PlayerState
 var hit_targets := []
 
 @onready var anim_sprite = $"../../AnimatedSprite2D"
-@onready var slash_scene = preload("res://player/slashEffect.tscn")
+@onready var slash_scene = preload("res://player/visual_effects/slashEffect.tscn")
 
 #func _on_hurt_box_body_entered(body) -> void:
 	#if body is Enemy:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jtkk7lu6yo1"]
 
-[ext_resource type="PackedScene" uid="uid://d3drpqpwswmor" path="res://player/playerHPBar.tscn" id="1_gggue"]
+[ext_resource type="PackedScene" uid="uid://d3drpqpwswmor" path="res://player/backgroundObjects/playerHPBar.tscn" id="1_gggue"]
 
 [node name="PlayerCamera" type="Camera2D"]
 zoom = Vector2(4, 4)

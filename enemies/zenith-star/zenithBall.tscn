@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dsbf5iplbgi38"]
 
-[ext_resource type="Script" uid="uid://cnmw0wyof7m8x" path="res://enemies/zenith_ball.gd" id="1_5c4bo"]
+[ext_resource type="Script" uid="uid://cnmw0wyof7m8x" path="res://enemies/zenith-star/zenith_ball.gd" id="1_5c4bo"]
 [ext_resource type="Texture2D" uid="uid://dyvoi8liaf6po" path="res://resources/sprites/enemies/zenith.png" id="1_5k5df"]
 [ext_resource type="Texture2D" uid="uid://derv1g6x70j57" path="res://resources/sprites/enemies/chain.png" id="2_5c4bo"]
 [ext_resource type="PackedScene" uid="uid://d1occ6txy6ofj" path="res://background-elements/ExecutableObject.tscn" id="4_hxywh"]

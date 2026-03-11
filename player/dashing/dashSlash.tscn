@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c0q2u5v28xg1a"]
 
-[ext_resource type="Script" uid="uid://cdy640rbiklub" path="res://player/dash_slash.gd" id="1_o1ul3"]
+[ext_resource type="Script" uid="uid://cdy640rbiklub" path="res://player/dashing/dash_slash.gd" id="1_o1ul3"]
 [ext_resource type="Texture2D" uid="uid://b5yu26nct00pg" path="res://resources/sprites/dash-slash.png" id="2_ovwja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2rbrg"]

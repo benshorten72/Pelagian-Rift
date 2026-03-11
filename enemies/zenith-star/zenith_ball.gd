@@ -10,7 +10,7 @@ var friction_level:int = .2
 var air_time = 1
 var desired_scale
 var starting_scale = Vector2(1.4,1.4)
-@onready var target_scene = preload("res://player/playerTarget.tscn")
+@onready var target_scene = preload("res://player/backgroundObjects/playerTarget.tscn")
 @onready var executable_object:ExecutableObject = $ExecutableObject2
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://cd207ta5sctuf"]
 
-[ext_resource type="Script" uid="uid://e1gqgkgm48rh" path="res://enemies/zenith_star.gd" id="1_qruj1"]
+[ext_resource type="Script" uid="uid://e1gqgkgm48rh" path="res://enemies/zenith-star/zenith_star.gd" id="1_qruj1"]
 [ext_resource type="Texture2D" uid="uid://bdkfcc2lorjm5" path="res://resources/sprites/enemies/gunner-idle.png" id="2_7h1ly"]
 [ext_resource type="Texture2D" uid="uid://buwiqbnxl2dev" path="res://resources/sprites/enemies/gunner-Sheet-attack.png" id="3_ihw4i"]
 [ext_resource type="Texture2D" uid="uid://ddkvvk4hiswjx" path="res://resources/sprites/enemies/gunner-pulling-Sheet.png" id="4_ayb0l"]

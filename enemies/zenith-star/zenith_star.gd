@@ -1,7 +1,7 @@
 extends Enemy
 class_name ZenithStar
 @onready var animation_player = $AnimationPlayer
-@onready var ball_scene = preload("res://enemies/zenith_ball.tscn")
+@onready var ball_scene = preload("res://enemies/zenith-star/zenithBall.tscn")
 @onready var shield := $HyperionLightShield
 @onready var executable_object:ExecutableObject = $ExecutableObject
 @onready var hitbox = $hitbox
