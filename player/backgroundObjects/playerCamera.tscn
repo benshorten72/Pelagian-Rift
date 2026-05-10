@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://jtkk7lu6yo1"]
+[gd_scene load_steps=3 format=3 uid="uid://jtkk7lu6yo1"]
 
-[ext_resource type="PackedScene" uid="uid://d3drpqpwswmor" path="res://player/backgroundObjects/playerHPBar.tscn" id="1_gggue"]
+[ext_resource type="Script" uid="uid://c44ofal3jfvns" path="res://player/backgroundObjects/player_camera.gd" id="1_eqi7c"]
+[ext_resource type="PackedScene" uid="uid://c0ofxfibus3iw" path="res://GUI/GUI.tscn" id="2_eqi7c"]
 
 [node name="PlayerCamera" type="Camera2D"]
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("1_eqi7c")
 
-[node name="PlayerHpBar" parent="." instance=ExtResource("1_gggue")]
+[node name="Gui" parent="." instance=ExtResource("2_eqi7c")]

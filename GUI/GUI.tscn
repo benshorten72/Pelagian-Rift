@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ofxfibus3iw"]
+
+[ext_resource type="Script" uid="uid://dhhxmejauku6p" path="res://GUI/gui.gd" id="1_fve4e"]
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("progressbar")]
+script = ExtResource("1_fve4e")
+progressbar = NodePath("Gui/HBoxContainer/ProgressBar")
+
+[node name="Gui" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gui"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Gui/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true

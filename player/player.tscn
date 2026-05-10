@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cf10y5kdmqn5k"]
+[gd_scene load_steps=74 format=3 uid="uid://cf10y5kdmqn5k"]
 
 [ext_resource type="Script" uid="uid://dlvro20a1526p" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://doh40cpw0g14d" path="res://resources/sprites/idle-Sheet.png" id="2_1jxqw"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bsfvp8pylly7g" path="res://player/playerStates/attack.gd" id="6_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://8f4esf34hsyo" path="res://resources/sprites/run-strafe-Sheet.png" id="6_bwjto"]
 [ext_resource type="Script" uid="uid://b0ffxppyhw51d" path="res://player/playerStates/dodge.gd" id="7_1jxqw"]
-[ext_resource type="PackedScene" uid="uid://jtkk7lu6yo1" path="res://player/backgroundObjects/playerCamera.tscn" id="9_u1c27"]
 [ext_resource type="Script" uid="uid://ds5l73iygwidu" path="res://player/player_hurtbox.gd" id="10_n7ghd"]
 [ext_resource type="Script" uid="uid://cf72rfox4iqwl" path="res://player/playerStates/stunned.gd" id="13_bwjto"]
 [ext_resource type="PackedScene" uid="uid://cfdp08gjy6iod" path="res://player/visual_effects/trail/WaterTrail.tscn" id="15_606se"]
@@ -792,6 +791,12 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b26j0"]
 height = 58.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wodsf"]
+radius = 182.135
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_32hag"]
+radius = 255.441
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
 _animation_player = NodePath("AnimationPlayer")
@@ -813,8 +818,6 @@ frame_progress = 0.814022
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hqtel")
-
-[node name="PlayerCamera" parent="." instance=ExtResource("9_u1c27")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -877,6 +880,16 @@ debug_color = Color(0.834071, 0.256152, 0.734002, 0.42)
 
 [node name="SpeedBoostTimer" type="Timer" parent="."]
 wait_time = 0.689
+
+[node name="CameraTrackerDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTrackerDetector"]
+shape = SubResource("CircleShape2D_wodsf")
+
+[node name="CameraTrackerUnDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTrackerUnDetector"]
+shape = SubResource("CircleShape2D_32hag")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

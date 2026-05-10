@@ -22,7 +22,7 @@ var execute_function=func ():
 func _ready() -> void:
 	current_state=States.IDLE
 	health = MAX_HEALTH
-	
+	print("Hi", global_position)
 	executable_object.set_execute_function(execute_function)
 
 
@@ -53,6 +53,7 @@ func return_IDLE():
 	
 
 func _physics_process(delta: float) -> void:
+	
 	if is_instance_valid(executable_object):
 		executable_object.set_origin(global_position)
 	is_executable()

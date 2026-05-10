@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhp2dlkfhqbuj"]
+
+[ext_resource type="Script" uid="uid://dmjljllr14ifh" path="res://background-elements/camera_followable.gd" id="1_0s0h1"]
+[ext_resource type="Texture2D" uid="uid://cm81pyupfj63l" path="res://resources/sprites/camera_follower_debug.png" id="2_a0kwv"]
+
+[node name="CameraFollowable" type="Node2D"]
+script = ExtResource("1_0s0h1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_a0kwv")

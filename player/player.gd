@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var animation_player:AnimationPlayer = get_node(_animation_player)
 @onready var hurtbox := $HurtBox
 @onready var state_machine = $StateMachine
+@onready var camera_tracker_dector:Area2D = $CameraTrackerDetector
+@onready var camera_tracker_un_dector:Area2D = $CameraTrackerUnDetector
 
 const MAX_HEALTH = 100
 const SPEED = 300.0 
@@ -59,4 +61,5 @@ func push(push_from_point, strength):
 func hurt(amount:int, push_from_point=global_position, strength=1):
 	health-=amount
 	push(push_from_point, strength)
+	
 	

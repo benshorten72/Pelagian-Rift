@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/animation-key-helper/plugin.cfg")
 enemies=""
 projectiles=""
 executables="Objects that can be 'dashed' towards"
+trackable_object="For trackable objects for camera_followable "
 
 [input]
 
