@@ -1,5 +1,6 @@
 extends Node2D
 class_name Wave
+signal wave_completed
 
 enum WaveType { WITH_REPLACE, TIMED, WITH_REPLACE_TIMED }
 #With replace = when currently alive dips below with_replace_spawn_max, spawn more from list
@@ -23,7 +24,7 @@ func _ready() -> void:
 	for area in detector.get_overlapping_areas():
 		if area is EnemySpawnPoint:
 			enemy_spawn_point_list.append(area as EnemySpawnPoint)
-	start_wave()
+			
 func get_whos_alive(enemy_list:Array[Node2D]) -> Array[Node2D]:
 	var alive:Array[Node2D] = []
 	
@@ -36,7 +37,7 @@ func start_wave():
 	while enemy_list.size() > 0:
 		match state:
 			WaveType.WITH_REPLACE:
-				with_replace()
+				await with_replace()
 
 			WaveType.TIMED:
 				await timed()
@@ -45,6 +46,11 @@ func start_wave():
 				await with_replace_time_between()
 
 		await get_tree().process_frame
+	while get_whos_alive(spawned_enemies).size() > 0:
+		await get_tree().process_frame
+
+	print("Wave completed")
+	wave_completed.emit()
 
 func spawn_enemy(limit=999):
 	print("attempting to spawn enemies")
@@ -78,13 +84,13 @@ func wait_time_between():
 	await get_tree().create_timer(time_between_spawn).timeout
 
 func with_replace():
-	spawn_enemy(with_replace_spawn_max)
+	await spawn_enemy(with_replace_spawn_max)
 		
 func timed():
 	await wait_time_between()
-	spawn_enemy()
+	await spawn_enemy()
 
 func with_replace_time_between():
 	await wait_time_between()
-	spawn_enemy(with_replace_spawn_max)
+	await spawn_enemy(with_replace_spawn_max)
 		

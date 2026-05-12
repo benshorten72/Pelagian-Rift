@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vq3i05q8cvb"]
+
+[ext_resource type="Script" uid="uid://bieg7ivxdsk60" path="res://background-elements/waves/encounter.gd" id="1_pvxnn"]
+
+[node name="Encounter" type="Node2D"]
+script = ExtResource("1_pvxnn")

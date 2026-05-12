@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c3h0n078oky82"]
+[gd_scene load_steps=14 format=4 uid="uid://c3h0n078oky82"]
 
 [ext_resource type="PackedScene" uid="uid://cf10y5kdmqn5k" path="res://player/player.tscn" id="1_gojnm"]
 [ext_resource type="Texture2D" uid="uid://bj8nipadoyn4g" path="res://resources/shader/Screenshot 2026-03-03 at 23.24.47.png" id="1_sb12i"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bhp2dlkfhqbuj" path="res://background-elements/CameraFollowable.tscn" id="8_lnbra"]
 [ext_resource type="Texture2D" uid="uid://dch5q1bl6c3t0" path="res://resources/tilemaps/testmaps/Itch release tileset base 01.png" id="9_6emce"]
 [ext_resource type="PackedScene" uid="uid://dnl6gj7atr5fy" path="res://background-elements/waves/EnemySpawnPoint.tscn" id="10_58smv"]
+[ext_resource type="PackedScene" uid="uid://vq3i05q8cvb" path="res://background-elements/waves/Encounter.tscn" id="11_58smv"]
 [ext_resource type="PackedScene" uid="uid://bgpnox3xab2xr" path="res://background-elements/waves/Wave.tscn" id="11_a25ih"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lowby"]
@@ -554,3 +555,7 @@ time_between_spawn = 3.0
 batch_amount = 30
 state = 1
 enemy_list = Array[PackedScene]([ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv")])
+
+[node name="Encounter" parent="." node_paths=PackedStringArray("waves") instance=ExtResource("11_58smv")]
+position = Vector2(609, 524)
+waves = [NodePath("../Wave2")]
