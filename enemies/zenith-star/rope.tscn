@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnbypk60kpjoj"]
+
+[ext_resource type="Shader" uid="uid://b3svqtaykfigk" path="res://enemies/zenith-star/rope.gdshader" id="1_2s1j5"]
+[ext_resource type="Script" uid="uid://dow3v4v1ggk6n" path="res://enemies/zenith-star/rope.gd" id="1_ijbx0"]
+[ext_resource type="Texture2D" uid="uid://c3w7tptn51lfy" path="res://resources/sprites/enemies/chain-sheet.png" id="2_y2x7u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12a10"]
+shader = ExtResource("1_2s1j5")
+shader_parameter/frames = 11
+shader_parameter/fps = 8.0
+shader_parameter/repeats = 8.0
+
+[sub_resource type="Curve" id="Curve_2s1j5"]
+_data = [Vector2(0.077451, 1), 0.0, 0.0, 0, 0, Vector2(0.857843, 0.596704), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Rope" type="Line2D"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_12a10")
+width = 32.0
+width_curve = SubResource("Curve_2s1j5")
+texture = ExtResource("2_y2x7u")
+texture_mode = 1
+script = ExtResource("1_ijbx0")

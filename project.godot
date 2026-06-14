@@ -30,6 +30,7 @@ enemies=""
 projectiles=""
 executables="Objects that can be 'dashed' towards"
 trackable_object="For trackable objects for camera_followable "
+enemy_spawn_points="Points that enemies can spawn at, used by waves to detect correct children to add to wave"
 
 [input]
 

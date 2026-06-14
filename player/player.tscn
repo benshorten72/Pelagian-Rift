@@ -1,7 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://cf10y5kdmqn5k"]
+[gd_scene load_steps=76 format=3 uid="uid://cf10y5kdmqn5k"]
 
 [ext_resource type="Script" uid="uid://dlvro20a1526p" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://doh40cpw0g14d" path="res://resources/sprites/idle-Sheet.png" id="2_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://dnbypk60kpjoj" path="res://enemies/zenith-star/rope.tscn" id="2_32hag"]
 [ext_resource type="Texture2D" uid="uid://200kq8wxl514" path="res://resources/sprites/player/attack-Sheet.png" id="2_b26j0"]
 [ext_resource type="Script" uid="uid://dowbk7i504tvx" path="res://player/playerStates/StateMachine.gd" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://c3wdx4w5srtcw" path="res://player/playerStates/idle.gd" id="4_hqtel"]
@@ -15,6 +16,10 @@
 [ext_resource type="Script" uid="uid://ds5l73iygwidu" path="res://player/player_hurtbox.gd" id="10_n7ghd"]
 [ext_resource type="Script" uid="uid://cf72rfox4iqwl" path="res://player/playerStates/stunned.gd" id="13_bwjto"]
 [ext_resource type="PackedScene" uid="uid://cfdp08gjy6iod" path="res://player/visual_effects/trail/WaterTrail.tscn" id="15_606se"]
+
+[sub_resource type="Curve" id="Curve_32hag"]
+_data = [Vector2(0.275281, 0.166922), 0.0, 0.0, 0, 0, Vector2(0.867041, 0.825403), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
 atlas = ExtResource("2_b26j0")
@@ -801,7 +806,13 @@ radius = 255.441
 script = ExtResource("1_onrkg")
 _animation_player = NodePath("AnimationPlayer")
 
+[node name="Rope" parent="." instance=ExtResource("2_32hag")]
+position = Vector2(6, 0)
+width_curve = SubResource("Curve_32hag")
+is_parent_whackable = false
+
 [node name="WaterTrail" parent="." instance=ExtResource("15_606se")]
+visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
@@ -891,6 +902,10 @@ shape = SubResource("CircleShape2D_wodsf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTrackerUnDetector"]
 shape = SubResource("CircleShape2D_32hag")
 
+[node name="DodgeTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="SpeedBoostTimer" to="StateMachine/Idle" method="_on_speed_boost_timer_timeout"]
+[connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]

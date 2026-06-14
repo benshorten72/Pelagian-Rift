@@ -65,7 +65,7 @@ default_value_enabled = true
 default_value = 1.0
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_nw8sh"]
-size = Vector2(556, 253)
+size = Vector2(421, 183)
 title = "Get sine value"
 attached_nodes = PackedInt32Array(6)
 
@@ -74,7 +74,7 @@ size = Vector2(572.627, 922.575)
 title = "Get r value from texture"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_lm2iw"]
-size = Vector2(421, 369)
+size = Vector2(421, 183)
 title = "Quantize the value"
 attached_nodes = PackedInt32Array(23)
 

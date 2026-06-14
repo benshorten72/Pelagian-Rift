@@ -1,16 +1,19 @@
-[gd_scene load_steps=14 format=4 uid="uid://c3h0n078oky82"]
+[gd_scene load_steps=19 format=4 uid="uid://c3h0n078oky82"]
 
 [ext_resource type="PackedScene" uid="uid://cf10y5kdmqn5k" path="res://player/player.tscn" id="1_gojnm"]
 [ext_resource type="Texture2D" uid="uid://bj8nipadoyn4g" path="res://resources/shader/Screenshot 2026-03-03 at 23.24.47.png" id="1_sb12i"]
 [ext_resource type="PackedScene" uid="uid://c0ofxfibus3iw" path="res://GUI/GUI.tscn" id="1_y646j"]
 [ext_resource type="PackedScene" uid="uid://ba5l8itm4183q" path="res://enemies/enemy.tscn" id="2_1c2mv"]
 [ext_resource type="PackedScene" uid="uid://bycyh0dyuajeu" path="res://background-elements/debugger.tscn" id="3_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://cd207ta5sctuf" path="res://enemies/zenith-star/zenithStar.tscn" id="4_4ptq8"]
 [ext_resource type="PackedScene" uid="uid://jtkk7lu6yo1" path="res://player/backgroundObjects/playerCamera.tscn" id="6_gbhdq"]
 [ext_resource type="PackedScene" uid="uid://bhp2dlkfhqbuj" path="res://background-elements/CameraFollowable.tscn" id="8_lnbra"]
 [ext_resource type="Texture2D" uid="uid://dch5q1bl6c3t0" path="res://resources/tilemaps/testmaps/Itch release tileset base 01.png" id="9_6emce"]
 [ext_resource type="PackedScene" uid="uid://dnl6gj7atr5fy" path="res://background-elements/waves/EnemySpawnPoint.tscn" id="10_58smv"]
+[ext_resource type="Script" uid="uid://rslyxffotp0j" path="res://background-elements/waves/wave_data.gd" id="10_a25ih"]
 [ext_resource type="PackedScene" uid="uid://vq3i05q8cvb" path="res://background-elements/waves/Encounter.tscn" id="11_58smv"]
 [ext_resource type="PackedScene" uid="uid://bgpnox3xab2xr" path="res://background-elements/waves/Wave.tscn" id="11_a25ih"]
+[ext_resource type="Script" uid="uid://b1a7xqmbllpgp" path="res://background-elements/waves/enemy_spawn_point.gd" id="14_b7ax5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lowby"]
 texture = ExtResource("9_6emce")
@@ -513,6 +516,26 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_lowby")
 
+[sub_resource type="Resource" id="Resource_38et7"]
+script = ExtResource("10_a25ih")
+with_replace_spawn_max = 1
+time_between_spawn = 0.2
+batch_amount = 1
+state = 1
+time_between_consecutive_spawns = 0.0
+spawn_radius = 200.0
+metadata/_custom_type_script = "uid://rslyxffotp0j"
+
+[sub_resource type="Resource" id="Resource_b7ax5"]
+script = ExtResource("10_a25ih")
+with_replace_spawn_max = 1
+time_between_spawn = 0.2
+batch_amount = 1
+state = 1
+time_between_consecutive_spawns = 0.1
+spawn_radius = 5.0
+metadata/_custom_type_script = "uid://rslyxffotp0j"
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -545,17 +568,187 @@ position = Vector2(900, 524)
 player = NodePath("../Player")
 camera = NodePath("../PlayerCamera")
 
-[node name="EnemySpawnPoint" parent="." instance=ExtResource("10_58smv")]
-position = Vector2(1020, 520)
+[node name="Encounter" parent="." instance=ExtResource("11_58smv")]
+position = Vector2(2788, -8)
 
-[node name="Wave2" parent="." instance=ExtResource("11_a25ih")]
-position = Vector2(1016, 513)
-with_replace_spawn_max = 3
-time_between_spawn = 3.0
-batch_amount = 30
-state = 1
-enemy_list = Array[PackedScene]([ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv"), ExtResource("2_1c2mv")])
+[node name="Wave2" parent="Encounter" instance=ExtResource("11_a25ih")]
+position = Vector2(380, 9)
+wave_data = SubResource("Resource_38et7")
 
-[node name="Encounter" parent="." node_paths=PackedStringArray("waves") instance=ExtResource("11_58smv")]
-position = Vector2(609, 524)
-waves = [NodePath("../Wave2")]
+[node name="EnemySpawnPoint2" type="Node2D" parent="Encounter/Wave2"]
+position = Vector2(252, -82)
+script = ExtResource("14_b7ax5")
+metadata/_custom_type_script = "uid://b1a7xqmbllpgp"
+
+[node name="EnemySpawnPoint" parent="Encounter/Wave2" instance=ExtResource("10_58smv")]
+position = Vector2(4, 7)
+
+[node name="ZenithStar" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar2" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar3" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar4" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar5" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar6" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar7" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar8" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar9" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar10" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar11" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar12" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar13" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar14" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar15" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar16" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar17" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar18" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar19" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar20" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar21" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar22" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar23" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar24" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar25" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar26" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar27" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar28" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar29" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar30" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar31" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar32" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar33" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar34" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar35" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar36" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar37" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar38" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="ZenithStar39" parent="Encounter/Wave2" instance=ExtResource("4_4ptq8")]
+position = Vector2(5, -75)
+
+[node name="Wave" parent="Encounter" instance=ExtResource("11_a25ih")]
+wave_data = SubResource("Resource_b7ax5")
+
+[node name="EnemySpawnPoint" parent="Encounter/Wave" instance=ExtResource("10_58smv")]
+
+[node name="ZenithStar12" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar13" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar14" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar15" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar2" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar3" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar4" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar5" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar6" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar7" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar8" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar9" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar10" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="ZenithStar11" parent="Encounter/Wave" instance=ExtResource("4_4ptq8")]
+position = Vector2(385, -66)
+
+[node name="Enemy" parent="Encounter/Wave" instance=ExtResource("2_1c2mv")]
+position = Vector2(462, 107)
+
+[node name="ZenithStar" parent="." instance=ExtResource("4_4ptq8")]
+position = Vector2(718, 555)

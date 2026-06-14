@@ -14,5 +14,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Player) -> void:
-	body.hurt(DAMAGE,self.global_position,PUSH_AMOUNT)
-	queue_free()
+	if (body.hurt(DAMAGE,self.global_position,PUSH_AMOUNT)):
+		queue_free()

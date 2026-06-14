@@ -4,18 +4,21 @@ var min_distance = 100000
 var distance = min_distance;
 @onready var slash_scene = preload("res://player/dashing/DashSlash.tscn")
 @onready var dash_effect_scene = preload("res://player/dashing/dashoffEffect.tscn")
+func finish_dash():
+	player.can_be_hurt=true
+	finished.emit(IDLE)
 
 func enter(previous_state_path: String, data := {}) -> void:
 	print("Dash Entered")
 	executables_list = player.mouse_instance.get_valid_executables()
 	print(executables_list)
 	distance = min_distance
-
+	player.can_be_hurt=false
 	
 func physics_update(delta: float) -> void:	
 	if executables_list == null or typeof(executables_list)==TYPE_NIL:
 		print("error with enemy list for dashing", executables_list)
-		finished.emit(IDLE)
+		finish_dash()
 	if player.closest == null:
 		player.dash_elapsed_time = 0
 		for i in executables_list:
@@ -27,7 +30,8 @@ func physics_update(delta: float) -> void:
 
 		if player.closest == null:
 			print("No executables_list near mouse position")
-			finished.emit(IDLE)
+			finish_dash()
+			
 			return
 			
 		else:
@@ -49,4 +53,4 @@ func physics_update(delta: float) -> void:
 		player.closest = null
 		var slash = slash_scene.instantiate()
 		get_parent().get_parent().add_child(slash)
-		finished.emit(IDLE)
+		finish_dash()

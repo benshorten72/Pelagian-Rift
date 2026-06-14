@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var state_machine = $StateMachine
 @onready var camera_tracker_dector:Area2D = $CameraTrackerDetector
 @onready var camera_tracker_un_dector:Area2D = $CameraTrackerUnDetector
+@onready var dodge_timer:Timer = $DodgeTimer
+@onready var rope:Line2D = $Rope
 
 const MAX_HEALTH = 100
 const SPEED = 300.0 
@@ -16,9 +18,12 @@ const DASH_OFFSET = 20
 const DASH_TIME_TO_REACH = .1
 var input: Vector2
 
+
 var health:int
 var can_input = true
 var can_dodge_cancel = true
+var can_dodge=true
+var can_be_hurt = true
 var action_pressed = false
 var dodge_pressed = false
 var closest:ExecutableObject = null
@@ -37,9 +42,13 @@ func _ready() -> void:
 	mouse_instance = mouse_scene.instantiate()
 	add_child(mouse_instance)
 	health=MAX_HEALTH
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		rope.push(global_position,20)
 
 func get_input():
+
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y =  Input.get_action_strength("down") - Input.get_action_strength("up")
 	return input.normalized()
@@ -50,16 +59,25 @@ func _process(delta: float):
 
 func ready_for_input():
 	can_input = true
-	
+
 func ready_for_dodge_cancel():
 	can_dodge_cancel = true
+
 func push(push_from_point, strength):
 	var direction = (push_from_point - global_position).normalized()
 	velocity = -(direction * strength)
 	move_and_slide()
 
 func hurt(amount:int, push_from_point=global_position, strength=1):
-	health-=amount
-	push(push_from_point, strength)
-	
-	
+	if can_be_hurt:
+		health-=amount
+		push(push_from_point, strength)
+		return true
+	return false
+
+func _on_dodge_timer_timeout() -> void:
+	can_dodge=true
+
+func start_dodge_timer()->void:
+	can_dodge=false
+	dodge_timer.start()

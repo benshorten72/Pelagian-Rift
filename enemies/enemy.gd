@@ -7,7 +7,7 @@ var bulletScene = preload("res://enemies/bullet.tscn")
 @onready var timer:Timer = $Timer
 @onready var executable_object:ExecutableObject = $ExecutableObject
 
-const SPEED = 30
+const SPEED = 120
 const ATTACK_SPEED = 50
 const THRESHOLD_PERCENTAGE = .25
 var attack_speed_cdn = ATTACK_SPEED
@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 			current_state = States.AGGRO
 			fire()
 		States.STUNNED:
-			move_and_slide()
+			move_and_friction(delta)
 
 		
 		

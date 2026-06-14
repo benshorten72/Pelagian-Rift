@@ -27,18 +27,19 @@ func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		finished.emit(ATTACK1)
 	if Input.is_action_just_pressed("dodge"):
-		finished.emit(DODGE)
+		if player.can_dodge:
+			finished.emit(DODGE)
 	player.velocity = lerp(player.velocity, player.get_input() * (player.SPEED+bonus_speed), delta * player.ACCEL)	
 	
 	player.look_at(player.get_global_mouse_position())
 	player.move_and_slide()
 	if (player.velocity.abs().x+player.velocity.abs().y) > 150:
+		
 		if speed_boost_timer.paused==true and bonus_speed == 0:
 			speed_boost_timer.start()
 			speed_boost_timer.paused=false
-		var input_dir := Vector2(
-		player.input.x,player.input.y
-		).normalized()
+		
+		var input_dir := Vector2(player.input.x,player.input.y).normalized()
 		var local_dir = input_dir.rotated(-player.rotation)
 		dash_effect_rotation_offset=270
 

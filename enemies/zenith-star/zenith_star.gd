@@ -5,18 +5,23 @@ class_name ZenithStar
 @onready var shield := $HyperionLightShield
 @onready var executable_object:ExecutableObject = $ExecutableObject
 @onready var hitbox = $hitbox
+@onready var rope:Rope = $Rope
+@onready var timer:Timer = $Timer
 var AGGRO_object:Player
-const SPEED = 30
+const SPEED = 130
 var ball_enabled = false
 var ball:ZenithBall = null
 const THRESHOLD_PERCENTAGE = .40
+
 var execute_function=func ():	
 	take_damage(20000)
 	
 func _ready() -> void:
-	current_state=States.IDLE
+	enter_idle()
 	health=MAX_HEALTH
 	executable_object.set_execute_function(execute_function)
+	rope.disable()
+	
 const attack_range =200
 
 func take_damage(amount):
@@ -40,17 +45,21 @@ func _physics_process(delta: float) -> void:
 		States.IDLE:
 			shield.set_enabled(true)
 			if AGGRO_object != null:
-				current_state = States.AGGRO
+				enter_agro()
+
 		States.AGGRO:
 			shield.set_enabled(true)
+			look_at(AGGRO_object.global_position)
+			rotate(deg_to_rad(270))
 			if AGGRO_object == null:
-				current_state = States.IDLE
+				enter_agro()
 			move_towards_point(AGGRO_object.global_position,SPEED)
+			
 			if global_position.distance_to(AGGRO_object.global_position) > attack_range+150:
-				current_state = States.IDLE
+				enter_agro()
 			
 			if global_position.distance_to(AGGRO_object.global_position) < attack_range:
-				current_state = States.PREP_ATTACK
+				enter_prep_attack()
 		States.PREP_ATTACK:
 			shield.set_enabled(true)
 
@@ -59,13 +68,13 @@ func _physics_process(delta: float) -> void:
 			if !animation_player.is_playing():
 				animation_player.play("prep_attack")
 			if global_position.distance_to(AGGRO_object.global_position) > 250:
-				current_state = States.AGGRO
+				enter_agro()
 		States.RECHARGING:
 			animation_player.play("pulling")
 		States.STUNNED:
 			animation_player.play("recoil")
 			shield.set_enabled(false)
-	move_and_firction(delta)
+	move_and_friction(delta)
 					
 					
 			
@@ -79,11 +88,49 @@ func create_ball()->void:
 	ball_instance.global_position=global_position
 	ball = ball_instance
 	current_state = States.RECHARGING
+	rope.create(ball)
+	rope.set_process(true)
 	
 func recover_pull()->void:
-	ball.queue_free()
-	current_state=States.AGGRO
+	if is_instance_valid(ball):
+		ball.queue_free()
+		current_state=States.AGGRO
 
-func recoil_over()->void:
+func enter_agro():
 	current_state=States.AGGRO
+	animation_player.play("run")
+
+func enter_idle():
+	current_state=States.IDLE
+	run_animation()
+func enter_prep_attack():
+	current_state=States.PREP_ATTACK
 	
+	animation_player.play("prep_attack")
+func run_animation() -> void:
+	var prob = randi_range(1,10)
+	if prob > 5:
+		animation_player.play("idle")
+	else:
+		animation_player.play("idle-alt")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if current_state==States.IDLE:
+		run_animation()
+
+func timer_start():
+	print("Timer started")
+	rope.activate_whacking()
+	timer.start(.2)
+	
+func _on_timer_timeout() -> void:
+	rope.disable()
+	print("Timer ended, rope disabeld")
+	#current_state=States.STUNNED
+
+func whack():
+	# set rope to begin disabled
+	if current_state == States.RECHARGING:
+		current_state = States.STUNNED
+		rope.disable()
