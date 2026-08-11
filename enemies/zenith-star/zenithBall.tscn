@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dsbf5iplbgi38"]
+[gd_scene load_steps=21 format=3 uid="uid://dsbf5iplbgi38"]
 
 [ext_resource type="Script" uid="uid://cnmw0wyof7m8x" path="res://enemies/zenith-star/zenith_ball.gd" id="1_5c4bo"]
 [ext_resource type="Texture2D" uid="uid://derv1g6x70j57" path="res://resources/sprites/enemies/chain.png" id="2_5c4bo"]
@@ -9,53 +9,56 @@
 _data = [Vector2(0.166667, 0.171911), 0.0, 0.0, 0, 0, Vector2(0.672285, 0.386416), -0.639324, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcxwt"]
+atlas = ExtResource("2_rcxwt")
+region = Rect2(0, 0, 24, 24)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhrqt"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2clbd"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(48, 0, 48, 48)
+region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8dsju"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(96, 0, 48, 48)
+region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ds1xw"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(96, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v2l5k"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(192, 0, 48, 48)
+region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nytsy"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(240, 0, 48, 48)
+region = Rect2(144, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jenv"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(288, 0, 48, 48)
+region = Rect2(168, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ig07q"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(336, 0, 48, 48)
+region = Rect2(192, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpkoj"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(384, 0, 48, 48)
+region = Rect2(216, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vuk70"]
 atlas = ExtResource("2_rcxwt")
-region = Rect2(432, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wun0y"]
-atlas = ExtResource("2_rcxwt")
-region = Rect2(480, 0, 48, 48)
+region = Rect2(240, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_exqoh"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcxwt")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uhrqt")
 }, {
@@ -85,9 +88,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vuk70")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wun0y")
 }],
 "loop": true,
 "name": &"default",
@@ -97,6 +97,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_hxywh"]
 radius = 18.0
 
+[sub_resource type="Animation" id="Animation_rcxwt"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhrqt"]
+_data = {
+&"idle": SubResource("Animation_rcxwt")
+}
+
 [node name="ZenithBall" type="Node2D"]
 z_index = -1
 script = ExtResource("1_5c4bo")
@@ -104,7 +112,7 @@ airtime_curve = SubResource("Curve_5c4bo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.8, 0.8)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_exqoh")
 frame_progress = 0.998541
 speed_scale = 1.5
@@ -129,5 +137,8 @@ shape = SubResource("CircleShape2D_hxywh")
 [node name="ExecutableObject2" parent="." instance=ExtResource("4_hxywh")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uhrqt")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

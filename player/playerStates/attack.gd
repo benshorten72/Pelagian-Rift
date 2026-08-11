@@ -46,6 +46,7 @@ func apply_damage():
 					"stun_duration": 5
 				})
 				return
+	
 	for body in player.hurtbox.get_overlapping_bodies():
 		if body is Enemy and body not in hit_targets:
 			body.take_damage(damage)
@@ -55,6 +56,9 @@ func apply_damage():
 			slash.global_position = body.global_position
 			body.take_damage(damage)
 			body.push(player.global_position, knockback)
+			player.global_combo_object.add_to_queue(player.global_combo_object.COMBO_POSSIBILITIES.attack)
+			
+	
 
 				
 			

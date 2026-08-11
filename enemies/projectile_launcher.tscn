@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://can8n565pfbou"]
+
+[ext_resource type="Script" uid="uid://cdhgbhvjcwcsf" path="res://enemies/projectile_launcher.gd" id="1_nvq4v"]
+
+[node name="ProjectileLauncher" type="Node2D" unique_id=1970331450]
+script = ExtResource("1_nvq4v")
+
+[node name="Timer" type="Timer" parent="." unique_id=1856172207]

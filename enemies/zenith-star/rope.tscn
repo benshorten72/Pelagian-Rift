@@ -9,6 +9,7 @@ shader = ExtResource("1_2s1j5")
 shader_parameter/frames = 11
 shader_parameter/fps = 8.0
 shader_parameter/repeats = 8.0
+shader_parameter/start_time = 0.0
 
 [sub_resource type="Curve" id="Curve_2s1j5"]
 _data = [Vector2(0.077451, 1), 0.0, 0.0, 0, 0, Vector2(0.857843, 0.596704), 0.0, 0.0, 0, 0]
@@ -22,3 +23,7 @@ width_curve = SubResource("Curve_2s1j5")
 texture = ExtResource("2_y2x7u")
 texture_mode = 1
 script = ExtResource("1_ijbx0")
+
+[node name="ProcessEndTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ProcessEndTimer" to="." method="_on_process_end_timer_timeout"]

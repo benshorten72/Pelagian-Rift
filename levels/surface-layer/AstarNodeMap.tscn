@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw84b16sdajvt"]
+
+[ext_resource type="Script" uid="uid://b7yj626av57rk" path="res://levels/surface-layer/astar_node_map.gd" id="1_jkies"]
+
+[node name="AstarNodeMap" type="Node2D" unique_id=1599425931]
+script = ExtResource("1_jkies")

@@ -20,7 +20,7 @@ func _ready() -> void:
 	enter_idle()
 	health=MAX_HEALTH
 	executable_object.set_execute_function(execute_function)
-	rope.disable()
+	rope.end_process()
 	
 const attack_range =200
 
@@ -94,6 +94,7 @@ func create_ball()->void:
 func recover_pull()->void:
 	if is_instance_valid(ball):
 		ball.queue_free()
+		rope.end_process()
 		current_state=States.AGGRO
 
 func enter_agro():
@@ -122,12 +123,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func timer_start():
 	print("Timer started")
 	rope.activate_whacking()
-	timer.start(.2)
+	timer.start(.5)
 	
 func _on_timer_timeout() -> void:
 	rope.disable()
 	print("Timer ended, rope disabeld")
-	#current_state=States.STUNNED
+	current_state=States.STUNNED
 
 func whack():
 	# set rope to begin disabled

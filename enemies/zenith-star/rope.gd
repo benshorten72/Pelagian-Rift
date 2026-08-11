@@ -5,9 +5,13 @@ class_name Rope
 @export var segment_length := 4.0
 @export var gravity := Vector2(0, 20)
 @export var is_parent_whackable=true
-
-
+@onready var process_end_timer = $ProcessEndTimer
 const MIN_WHACK_DISTANCE = 40
+const regular_texture_path = "res://resources/sprites/enemies/chain-sheet.png"
+const breaking_texture_path = "res://resources/sprites/enemies/chainbreak/chainbreak.png"
+
+@onready var regular_texture:Texture2D = preload(regular_texture_path)
+@onready var breaking_texture:Texture2D = preload(breaking_texture_path)
 
 var points_pos: Array[Vector2] = []
 var points_prev: Array[Vector2] = []
@@ -16,22 +20,35 @@ var end_parent: Node2D
 var mat := material as ShaderMaterial
 var is_whacking = false
 var is_connected_to_object = true
+var is_disabling := false
+
 
 func set_end_parent(end_parent_input):
 	end_parent=end_parent_input
 
 func create(end_parent_input):
 	visible=false
+	clear_points()
+	for i in range(segments):
+		add_point(parent.position)
+	texture=regular_texture
 	set_end_parent(end_parent_input)
 	is_whacking = false
 
-	for pos in points_pos:
-		pos = parent.global_position
+
 	visible = true
 	
 func disable():
-	visible=false
-	set_process(false)	
+	print("atempting to disabled")
+	if !is_disabling:
+		texture=breaking_texture
+		material.set_shader_parameter("start_time", Time.get_ticks_msec() / 1000.0)
+		print("Setting timer")
+
+		process_end_timer.start(.4)
+		print(texture)
+		is_disabling=true
+
 
 func looking_to_whack():
 	if is_parent_whackable:
@@ -103,6 +120,7 @@ func solve_constraints(start_pos: Vector2):
 		points_pos[i + 1] -= offset
 
 func activate_whacking():
+	print("Rope looking to whack")
 	is_whacking = true
 
 func push(push_from_point:Vector2, strength:float):
@@ -114,4 +132,11 @@ func push(push_from_point:Vector2, strength:float):
 			var force = strength * (1.0 - distance / 100.0)
 			points_pos[i] += offset.normalized() * force
 			
-	
+
+func end_process():
+	visible=false
+	set_process(false)
+
+func _on_process_end_timer_timeout() -> void:
+	print("process_ended")
+	end_process()

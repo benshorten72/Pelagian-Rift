@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.lerp(Vector2.ZERO, delta * friction_level)
 	position += velocity * delta
 	scale = scale.lerp(desired_scale, 10 * delta)
-	rotation+=velocity.length_squared()/10
+	rotation+=velocity.length_squared()/100000
 	if velocity.length() < 200:
 		is_executable()
 		is_damaging=false

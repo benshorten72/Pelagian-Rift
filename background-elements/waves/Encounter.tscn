@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://vq3i05q8cvb"]
+[gd_scene format=3 uid="uid://vq3i05q8cvb"]
 
 [ext_resource type="Script" uid="uid://bieg7ivxdsk60" path="res://background-elements/waves/encounter.gd" id="1_pvxnn"]
 
-[node name="Encounter" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y302x"]
+radius = 49.010204
+
+[node name="Encounter" type="Node2D" unique_id=1216237980]
 script = ExtResource("1_pvxnn")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=265797756]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=720407806]
+shape = SubResource("CircleShape2D_y302x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

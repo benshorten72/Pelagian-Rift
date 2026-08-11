@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfdp08gjy6iod"]
+[gd_scene format=3 uid="uid://cfdp08gjy6iod"]
 
 [ext_resource type="Script" uid="uid://dmq0tcqc1sxnr" path="res://player/visual_effects/trail/water_ripple.gd" id="1_j6ry4"]
 [ext_resource type="Shader" uid="uid://m5i0jjohq1iw" path="res://resources/shader/RippleShader.tres" id="1_l10pc"]
@@ -35,19 +35,20 @@ shader_parameter/FallOff = 5.0
 shader_parameter/Strength = 0.5
 shader_parameter/Distortion = 0.02
 
-[node name="WaterTrail" type="Node2D"]
+[node name="WaterTrail" type="Node2D" unique_id=1348720817]
+z_index = -2
 script = ExtResource("1_j6ry4")
 
-[node name="WaterTrailSprite" type="Sprite2D" parent="."]
+[node name="WaterTrailSprite" type="Sprite2D" parent="." unique_id=240850199]
 position = Vector2(5.96046e-08, 0)
 texture = SubResource("ViewportTexture_l10pc")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1258146695]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(128, 128)
 
-[node name="WaterTrailLine" type="Line2D" parent="SubViewport"]
+[node name="WaterTrailLine" type="Line2D" parent="SubViewport" unique_id=1311830854]
 material = SubResource("ShaderMaterial_2e2r3")
 position = Vector2(64, 64)
 points = PackedVector2Array(8, 10.625)
@@ -58,8 +59,8 @@ texture_mode = 2
 script = ExtResource("2_l10pc")
 MAX_QUEUE_LENGTH = 12
 
-[node name="WaterRipple" type="Sprite2D" parent="SubViewport"]
+[node name="WaterRipple" type="Sprite2D" parent="SubViewport" unique_id=565904025]
+self_modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_j6ry4")
 position = Vector2(64, 64)
-scale = Vector2(0.05, 0.5)
 texture = ExtResource("5_j6ry4")

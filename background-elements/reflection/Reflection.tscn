@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ccxbfh7w6abcs"]
+
+[ext_resource type="Script" uid="uid://7tdpdj108q18" path="res://background-elements/reflection/reflectionManager.gd" id="1_jdql1"]
+[ext_resource type="Texture2D" uid="uid://dnrep2rvns3f4" path="res://resources/sprites/blank.png" id="2_engkn"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=300782122]
+scale = Vector2(100, 110)
+texture = ExtResource("2_engkn")
+
+[node name="Reflection" type="SubViewportContainer" parent="." unique_id=823804945]
+z_index = -5
+z_as_relative = false
+script = ExtResource("1_jdql1")
+
+[node name="SubViewport" type="SubViewport" parent="Reflection" unique_id=664777622]
+handle_input_locally = false
+render_target_update_mode = 4

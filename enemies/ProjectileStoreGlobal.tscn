@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dysrhcxxpflmx"]
+
+[ext_resource type="Script" uid="uid://dxyrypofpeaga" path="res://enemies/projectile_store.gd" id="1_4gbto"]
+
+[node name="ProjectileStoreGlobal" type="Node2D" unique_id=935153260]
+script = ExtResource("1_4gbto")

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://fnwmhddcv7qo"]
+
+[ext_resource type="Script" uid="uid://qmt0ulkrg0kk" path="res://player/global_combo_object.gd" id="1_ykvj5"]
+
+[node name="GlobalComboObject" type="Control" unique_id=1368225991]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ykvj5")
+
+[node name="QueuePop" type="Timer" parent="." unique_id=686995015]
+autostart = true
+
+[connection signal="timeout" from="QueuePop" to="." method="_on_queue_pop_timeout"]

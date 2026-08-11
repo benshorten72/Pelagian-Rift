@@ -1,46 +1,69 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba5l8itm4183q"]
+[gd_scene format=3 uid="uid://ba5l8itm4183q"]
 
 [ext_resource type="Script" uid="uid://bli0xwqjiys08" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://c0j2abemeadf0" path="res://icon.svg" id="1_fw1ev"]
 [ext_resource type="PackedScene" uid="uid://d1occ6txy6ofj" path="res://background-elements/ExecutableObject.tscn" id="3_orwns"]
 [ext_resource type="PackedScene" uid="uid://bs1negae27ke1" path="res://enemies/HPBar.tscn" id="4_a6vjd"]
+[ext_resource type="PackedScene" uid="uid://can8n565pfbou" path="res://enemies/projectile_launcher.tscn" id="5_07tka"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7frlh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_orwns"]
 radius = 210.01
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y302x"]
+radius = 45.044422
+
+[node name="Enemy" type="CharacterBody2D" unique_id=909634373 groups=["enemies"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_7frlh")
 metadata/_custom_type_script = "uid://0svbocwvssji"
 
-[node name="Body" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="." unique_id=911063493]
 shape = SubResource("CircleShape2D_7frlh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=413011502]
 modulate = Color(0.834327, 0.583334, 0.804752, 1)
 self_modulate = Color(0.748014, 0.334107, 0.400866, 1)
 scale = Vector2(0.0898438, 0.0976562)
 texture = ExtResource("1_fw1ev")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1295126665]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1425962804]
 shape = SubResource("CircleShape2D_orwns")
 debug_color = Color(0, 0.6, 0.701961, 0.0235294)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=713157706]
 wait_time = 0.1
 one_shot = true
 
-[node name="ExecutableObject" parent="." instance=ExtResource("3_orwns")]
+[node name="ExecutableObject" parent="." unique_id=1397775438 instance=ExtResource("3_orwns")]
 position = Vector2(335.097, 330.048)
 
-[node name="HpBar" parent="." instance=ExtResource("4_a6vjd")]
+[node name="HpBar" parent="." unique_id=195766298 instance=ExtResource("4_a6vjd")]
 offset_left = 0.0
 offset_right = 200.0
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=242881207]
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="NavAgentRecalculate" type="Timer" parent="." unique_id=61684926]
+wait_time = 0.7
+
+[node name="NavigationGrouperAreaCheck" type="Area2D" parent="." unique_id=1426791758]
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationGrouperAreaCheck" unique_id=1043692868]
+shape = SubResource("CircleShape2D_y302x")
+
+[node name="ProjectileLauncher" parent="." unique_id=1970331450 instance=ExtResource("5_07tka")]
+position = Vector2(0, 10)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="NavAgentRecalculate" to="." method="_on_nav_agent_recalculate_timeout"]

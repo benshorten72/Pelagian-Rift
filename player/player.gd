@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var camera_tracker_un_dector:Area2D = $CameraTrackerUnDetector
 @onready var dodge_timer:Timer = $DodgeTimer
 @onready var rope:Line2D = $Rope
-
+@onready var global_combo_object:GlobalComboObjectClass = GlobalComboObject
 const MAX_HEALTH = 100
 const SPEED = 300.0 
 const BONUS_SPEED=200.0
@@ -43,12 +43,7 @@ func _ready() -> void:
 	add_child(mouse_instance)
 	health=MAX_HEALTH
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		rope.push(global_position,20)
-
 func get_input():
-
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y =  Input.get_action_strength("down") - Input.get_action_strength("up")
 	return input.normalized()
